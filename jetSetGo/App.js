@@ -5,8 +5,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginScreen from './screens/login';
 import HomeScreen from './screens/home';
 import { Image } from 'react-native';
+import WelcomeScreen from './screens/welcome';
 
 const Stack = createStackNavigator();
+const RootStack = createStackNavigator();
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,16 +17,15 @@ const App = () => {
   const checkAuthentication = async () => {
     const token = await AsyncStorage.getItem('token');
     if (token) {
-      setIsLogged(true)
+      setIsLogged(true);
     }
   };
 
   useEffect(() => {
     checkAuthentication();
-    let timer1 = setTimeout(() => setIsLoading(false), 2000);
-    return () => {
-      clearTimeout(timer1);
-    };
+    //AsyncStorage.removeItem('token');
+    setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout();
   }, []);
 
   return (
@@ -33,6 +34,7 @@ const App = () => {
         <Image
           source={require("./assets/loader.gif")}
           style={{
+            marginTop: 200,
             width: 450,
             height: 450,
             resizeMode: "cover",
@@ -40,29 +42,20 @@ const App = () => {
           }}
         ></Image>
       ) : (
-        isLogged ? <AppStack /> : <AuthStack />
-      )
-      }
-    </NavigationContainer >
+        <RootStack.Navigator screenOptions={{ headerShown: false }}>
+          <RootStack.Screen name="Main" component={MainStack} />
+          <RootStack.Screen name="Login" component={LoginScreen} />
+        </RootStack.Navigator>
+      )}
+    </NavigationContainer>
   );
 };
 
-const AppStack = () => {
+const MainStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} options={{
-        headerShown: false
-      }} />
-    </Stack.Navigator>
-  );
-};
-
-const AuthStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Login" component={LoginScreen} options={{
-        headerShown: false
-      }} />
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Welcome'>
+      <Stack.Screen name="Welcome" component={WelcomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   );
 };

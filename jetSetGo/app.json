@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "jetSetGo",
+    "name": "Jet Set Go",
     "slug": "jetSetGo",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,22 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.abhijith5008.jetSetGo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9e441b3e-90af-47b4-869d-dfa662e873d1"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/9e441b3e-90af-47b4-869d-dfa662e873d1"
     }
   }
 }

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-const { height, width } = Dimensions.get('screen');
 import * as Animatable from 'react-native-animatable';
+
+const { height, width } = Dimensions.get('screen');
 
 const ThreeElementSwitch = ({ elements, onSelect }) => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -15,10 +16,12 @@ const ThreeElementSwitch = ({ elements, onSelect }) => {
     const handleIcon = (value) => {
         if (value === "List")
             return "list";
-        if (value === "Sort Asc")
+        if (value === "₹ Sort Asc")
             return "sort-amount-asc";
-        if (value === "Sort Desc")
+        if (value === "₹ Sort Desc")
             return "sort-amount-desc";
+        if (value === "Filter")
+            return "filter";
     };
 
     return (
@@ -43,12 +46,11 @@ const ThreeElementSwitch = ({ elements, onSelect }) => {
                         shadowOpacity: index === selectedIndex ? 0.25 : 0,
                         shadowRadius: index === selectedIndex ? 4 : 0,
                     }]}
-                    // Make sure the button has enough touchable area
-                    onPress={() => handleSelect(index)} // Check for typos
+                    onPress={() => handleSelect(index)} 
                 >
                     {index === selectedIndex ? (
                         <Animatable.View duration={300} animation="bounceInRight" easing='ease'>
-                            <FontAwesome name={handleIcon(element)} size={24} color={'#ddeaf1'} />
+                            <FontAwesome name={handleIcon(element)} size={22} color={'#ddeaf1'} />
                         </Animatable.View>
                     ) : (
                         <Animatable.View duration={300} animation="bounceInLeft" easing='ease'>

@@ -1,41 +1,37 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Modal, Button, TouchableOpacity, Dimensions } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import moment from 'moment';
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 const { height, width } = Dimensions.get('screen');
 
-const FlightItem = ({ details }) => {
-    const [modalVisible, setModalVisible] = useState(false);
-    const getDate = (value) => moment(value).format('dddd MMM Do YY');
+const FlightItem = ({ details, modalHandler }) => {
+    const getDate = (value) => moment(value).format('dddd MMM D');
     const getTime = (value) => moment(value).format('LT');
 
-    const toggleModal = () => {
-        setModalVisible(!modalVisible);
+    const toggleModal = (item) => {
+        modalHandler(item);
     };
 
     return (
-        <TouchableOpacity style={styles.viewContainer} onPress={toggleModal}>
+        <TouchableOpacity style={styles.viewContainer} onPress={() => toggleModal(details)}>
             <View style={styles.details}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' ,justifyContent:"space-between"}}>
                     <Text style={styles.origin}>{details.origin}</Text>
-                    <View style={{ flex: 1, height: 1, backgroundColor: '#1e2659', marginLeft: 20, marginRight: 20 }} />
-                    <View style={{ transform: [{ rotate: '90deg' }] }}>
-                        <MaterialIcons name="flight" size={30} color="#1e2659" />
-                    </View>
-                    <View style={{ flex: 1, height: 1, backgroundColor: '#1e2659', marginLeft: 20, marginRight: 20 }} />
                     <Text style={styles.origin}>{details.destination}</Text>
                 </View>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flex: 1, height: 1, backgroundColor: '#1e2659', marginLeft: 10, marginRight: 10 }} />
+                <View style={{ transform: [{ rotate: '90deg' }] }}>
+                    <MaterialIcons name="flight" size={30} color="#1e2659" />
+                </View>
+                <View style={{ flex: 1, height: 1, backgroundColor: '#1e2659', marginLeft: 10, marginRight: 10 }} />
             </View>
             <View style={styles.right}>
                 <Text style={styles.airline}>{details.airline}</Text>
                 <Text style={styles.duration}>{details.duration}</Text>
                 <Text style={styles.price}>₹{details.price}</Text>
-            </View>
-            <View style={styles.right}>
-                <Text style={styles.flightNumber}>Flight: {details.flightNumber}</Text>
-                <Text style={styles.flightNumber}>{details.aircraft}</Text>
             </View>
             <View style={styles.right}>
                 <Text style={styles.date}>{getDate(details.arrivalTime)}</Text>
@@ -44,19 +40,13 @@ const FlightItem = ({ details }) => {
             <View style={styles.right}>
                 <Text style={styles.time}>{getTime(details.arrivalTime)}</Text>
                 <Text style={styles.time}>{getTime(details.departureTime)}</Text>
-            </View>           
+            </View>
         </TouchableOpacity>
     );
 };
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        zIndex: 1,
-        paddingVertical: 30,
-        backgroundColor: "#fff"
-    },
     viewContainer: {
         flex: 1,
         paddingVertical: 20,
@@ -74,10 +64,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 1,
     },
-    left: {
-        marginRight: 20,
-        alignItems: 'center',
-    },
     price: {
         fontSize: 18,
         fontWeight: 'bold',
@@ -86,10 +72,12 @@ const styles = StyleSheet.create({
     duration: {
         fontSize: 14,
         color: '#1e2659',
+        marginVertical: 5
     },
     date: {
         fontSize: 17,
-        fontWeight: '400',
+        fontWeight: '600',
+        marginVertical: 5,
         color: '#1e2659',
     },
     time: {
@@ -101,13 +89,15 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        marginHorizontal: 10,
         justifyContent: "space-between"
     },
     details: {
         marginBottom: 10,
+        marginHorizontal: 10,
     },
     origin: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: 'bold',
         color: '#1e2659',
     },
@@ -115,6 +105,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: '#1e2659',
+        marginVertical: 5
     },
     destination: {
         fontSize: 16,
@@ -123,54 +114,8 @@ const styles = StyleSheet.create({
     },
     flightNumber: {
         fontSize: 14,
+        marginVertical: 5,
         color: '#1e2659',
-    },
-    modalContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    modalContent: {
-        backgroundColor: '#fff',
-        padding: 20,
-        borderRadius: 10,
-        elevation: 5,
-    },
-    modalText: {
-        fontSize: 16,
-        color: '#1e2659',
-        marginBottom: 10,
-    },
-    modalButtons: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginTop: 20,
-    },
-    touch: {
-        alignItems: "center",
-        alignSelf: "center",
-        margin: 2,
-        width: 100,
-        height: 40,
-        backgroundColor: "#1e2659",
-        color: '#1e2659',
-        padding: 6,
-        borderRadius: 20,
-        elevation: 5,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 1,
-    },
-    titleImage: {
-        width: width / 2,
-        height: 40,
-        alignSelf: "center",
-        resizeMode: "cover",
     },
 });
 
