@@ -16,7 +16,7 @@ const FlightItem = ({ details, modalHandler }) => {
     return (
         <TouchableOpacity style={styles.viewContainer} onPress={() => toggleModal(details)}>
             <View style={styles.details}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' ,justifyContent:"space-between"}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
                     <Text style={styles.origin}>{details.origin}</Text>
                     <Text style={styles.origin}>{details.destination}</Text>
                 </View>
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         margin: 7,
         marginHorizontal: 10,
+        marginVertical: 12,
         backgroundColor: '#ddeaf1',
         padding: 15,
         borderRadius: 35,

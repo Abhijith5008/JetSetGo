@@ -107,6 +107,7 @@ const Home = () => {
                 <Image
                     source={require("../assets/screenLoader.gif")}
                     style={{
+                        marginTop:height/4.5,
                         width: 250,
                         height: 250,
                         alignSelf: "center",

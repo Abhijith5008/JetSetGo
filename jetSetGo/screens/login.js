@@ -1,10 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, TextInput, Text, Image, StyleSheet, Dimensions, TouchableOpacity, StatusBar } from 'react-native';
+import { AuthContext } from '../components/AuthContext';
 
 const { width, height } = Dimensions.get("window");
 
 const LoginScreen = ({ navigation }) => {
+    const { setIsLoggedIn } = useContext(AuthContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -20,7 +22,7 @@ const LoginScreen = ({ navigation }) => {
                 setPassword('');
                 const token = '168hedwijjdiwo832idTokenhajhsjas';
                 await AsyncStorage.setItem('token', token);
-                navigation.navigate('Main', { screen: 'Home' });
+                setIsLoggedIn(true);
             } else
                 setErr("UserName or Password Incorrect !!! ");
         }
@@ -45,8 +47,7 @@ const LoginScreen = ({ navigation }) => {
             setUsername('');
             setPassword('');
             setFirstName('');
-            console.log('navigation object:', navigation);
-            navigation.navigate('Main', { screen: 'Home' });
+            setIsLoggedIn(true);
         } else {
             alert('Please enter username and password');
         }

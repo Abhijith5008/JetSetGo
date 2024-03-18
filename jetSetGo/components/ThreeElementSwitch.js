@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     container: {
         alignSelf: "center",
         zIndex: 10,
-        width: width / 1.1,
-        height: height / 18,
+        width: width / 1.05,
+        height: height / 16,
         flexDirection: 'row',
         backgroundColor: '#ddeaf1',
         borderTopWidth: 2,

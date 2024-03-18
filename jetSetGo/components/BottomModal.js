@@ -30,10 +30,10 @@ const BottomModal = ({ visible, data, onClose, selectedBook }) => {
             backgroundStyle={{ backgroundColor: "#1e2659" }}
             containerStyle={{
                 backgroundColor: "#1e2659",
-                marginLeft: 16,
-                marginTop: height / 2.3,
-                height: height / 1.7,
-                width: width / 1.1,
+                marginLeft: 10,
+                marginTop: height / 1.95,
+                height: height / 1.9,
+                width: width / 1.04,
                 borderTopLeftRadius: 30,
                 borderTopRightRadius: 30,
                 borderBottomLeftRadius: 30,
@@ -67,7 +67,7 @@ const BottomModal = ({ visible, data, onClose, selectedBook }) => {
                 <View style={styles.dataContainer}>
                     <View style={styles.row}>
                         <Text style={styles.dataTitle}>From</Text>
-                        <Text style={styles.data}>{data.origin}</Text>
+                        <Text style={styles.data}>{data.origin}etvfbin</Text>
                     </View>
                     <View style={styles.row}>
                         <Text style={styles.dataTitle}>AirCraft</Text>
@@ -106,7 +106,18 @@ const BottomModal = ({ visible, data, onClose, selectedBook }) => {
                         <Text style={styles.data}>{data.flightNumber}</Text>
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => handleClick(data)} style={[styles.touch, { backgroundColor: "#ddeaf1", alignSelf: "center" }]} title="Login">
+                <View
+                    style={{
+                        borderStyle: 'dashed',
+                        borderWidth: 1,
+                        borderColor: '#ddeaf1',
+                        margin: -1,
+                        height: 0,
+                        marginBottom: 0,
+                    }}>
+                    <View style={{ width: 60 }}></View>
+                </View>
+                <TouchableOpacity onPress={() => handleClick(data)} style={[styles.touch, { alignSelf: "center" }]}>
                     <Text style={{ color: "#1e2659", marginTop: 3, fontSize: 20, fontWeight: 500 }}>Book Now</Text>
                 </TouchableOpacity>
             </View>
@@ -150,23 +161,20 @@ const styles = StyleSheet.create({
     },
     dataContainer: {
         flexDirection: 'row',
-        marginVertical: 7,
         textAlign: "left",
         justifyContent: 'space-evenly',
-        flexWrap: 'wrap',
     },
     row: {
         flex: 1,
         alignItems: 'flex-start',
         padding: 5,
         marginLeft: 30,
-        marginVertical: 7,
+        marginVertical: 5,
     },
     dataTitle: {
         textAlign: "left",
         fontSize: 16,
         color: '#ddeaf1',
-        marginBottom: 5,
     },
     data: {
         fontSize: 18,
@@ -178,11 +186,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         textAlign: 'center',
         width: width / 2,
-        height: height / 15,
+        height: height / 16,
         margin: 2,
+        marginTop: 12,
         backgroundColor: '#cce8e0',
         color: '#1e2659',
-        padding: 10,
+        padding: 7,
         borderRadius: 20,
         elevation: 5,
         shadowColor: '#000',
@@ -192,7 +201,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 1,
-        marginVertical: 20
     },
 });
 
